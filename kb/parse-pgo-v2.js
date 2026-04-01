@@ -165,18 +165,171 @@ function extractProperty(texts) {
   return props;
 }
 
-function assembleNames(nameWords) {
-  const fullNames = [];
-  let current = [];
-  for (const w of nameWords) {
-    current.push(w);
-    if (w.match(/(вна|вич|ович|івна|ївна|ївни|овна)$/i) && current.length >= 2) {
-      fullNames.push(current.join(' '));
-      current = [];
+function isPatronymic(w) {
+  return /(?:вна|вич|ович|івна|ївна|овна|ївни)$/i.test(w);
+}
+
+function isRelation(w) {
+  const rels = ['голова', 'дружина', 'чоловік', 'син', 'дочка', 'донька',
+    'мати', 'батько', 'зять', 'невістка', 'онук', 'онука', 'теща', 'тесть',
+    'свекруха', 'свекор', 'бабуся', 'дідусь', 'брат', 'сестра'];
+  return rels.includes(w.toLowerCase().trim());
+}
+
+function isDate(w) {
+  return /^\d{2}\.\d{2}\.\d{4}$/.test(w.trim());
+}
+
+const NAME_PATTERN = /^[А-ЯІЇЄҐ][а-яіїєґ']+$/;
+const NOISE_SET = new Set([
+  'Відмітка', 'Адреса', 'Місце', 'Прізвище', 'Стать', 'Число', 'Родинні',
+  'Наявність', 'Загальна', 'Житлова', 'Кількість', 'Хутрові', 'Кролі',
+  'Додаткова', 'Матеріал', 'Площа', 'Домогосподарство', 'Інвалід',
+  'Пенсіонер', 'Запов', 'Спеціальні', 'Відомості', 'Інформація',
+  'Розділ', 'Примітка', 'Реєстрації', 'Підпис', 'Землеволодіння',
+  'Закинутий', 'Птиця', 'Свині', 'Коні', 'Вівці', 'Кози',
+  'Попереднє', 'Нюються', 'Нено', 'Маються', 'Помер',
+]);
+
+function isNameWord(w) {
+  const t = w.trim();
+  return NAME_PATTERN.test(t) && t.length > 2 && !NOISE_SET.has(t) && !isRelation(t);
+}
+
+/**
+ * Extract structured family members from raw XPS texts in order.
+ *
+ * XPS structure per household (across 4-5 pages):
+ *   [Прізвище] [По-батькові] [dd.mm.yyyy]  ← голова
+ *   [Прізвище] [Ім'я]                       ← ???
+ *   [relation] [Ім'я] [По-батькові] [dd.mm.yyyy]  ← член сім'ї
+ *   [Прізвище] [relation] [Ім'я] [По-батькові] [dd.mm.yyyy]
+ *
+ * Strategy: build a stream of typed tokens, then assemble persons.
+ */
+function extractMembers(allTexts) {
+  // Step 1: Tokenize the stream
+  const tokens = [];
+  for (const raw of allTexts) {
+    const t = raw.trim();
+    if (!t || t.length < 2) continue;
+    if (isDate(t)) { tokens.push({ type: 'date', value: t }); continue; }
+    if (isRelation(t)) { tokens.push({ type: 'rel', value: t.toLowerCase() }); continue; }
+    if (isNameWord(t)) {
+      if (isPatronymic(t)) {
+        tokens.push({ type: 'patronymic', value: t });
+      } else {
+        tokens.push({ type: 'name', value: t });
+      }
+      continue;
     }
   }
-  if (current.length >= 2) fullNames.push(current.join(' '));
-  return fullNames;
+
+  // Step 2: Detect owner surname from first name token
+  let ownerSurname = null;
+  for (const tk of tokens) {
+    if (tk.type === 'name') { ownerSurname = tk.value; break; }
+  }
+
+  // Step 3: Assemble persons by scanning tokens
+  // A person = [surname?] [first_name?] [patronymic?] + [date?]
+  // Boundaries: relation word, repeated owner surname, date after patronymic
+  const members = [];
+  let nameParts = [];
+  let relation = null;
+  let date = null;
+
+  function flush() {
+    if (nameParts.length === 0 && !date) return;
+
+    let fullName;
+    if (nameParts.length >= 3) {
+      fullName = nameParts.slice(0, 3).join(' ');
+    } else if (nameParts.length === 2) {
+      fullName = nameParts.join(' ');
+    } else if (nameParts.length === 1) {
+      fullName = nameParts[0];
+    } else {
+      return;
+    }
+
+    const birthYear = date ? parseInt(date.split('.')[2]) : null;
+    const rel = members.length === 0 ? 'голова' : (relation || null);
+    members.push({ full_name: fullName, birth_year: birthYear, relation: rel });
+    nameParts = [];
+    relation = null;
+    date = null;
+  }
+
+  for (let i = 0; i < tokens.length; i++) {
+    const tk = tokens[i];
+
+    if (tk.type === 'rel') {
+      flush();
+      relation = tk.value;
+      continue;
+    }
+
+    if (tk.type === 'date') {
+      date = tk.value;
+      // If we have no name parts but have a pending person (just flushed),
+      // attach date to last member
+      if (nameParts.length === 0 && members.length > 0 && !members[members.length - 1].birth_year) {
+        members[members.length - 1].birth_year = parseInt(date.split('.')[2]);
+        date = null;
+      } else {
+        flush();
+      }
+      continue;
+    }
+
+    if (tk.type === 'name') {
+      // Owner surname appearing again = new person boundary
+      if (ownerSurname && tk.value === ownerSurname && nameParts.length > 0) {
+        flush();
+      }
+      // Already have 3+ name parts = start new person
+      if (nameParts.length >= 3) {
+        flush();
+      }
+      nameParts.push(tk.value);
+      continue;
+    }
+
+    if (tk.type === 'patronymic') {
+      // If no name parts yet, this patronymic belongs to previous person
+      // (pattern: [Прізвище] [date?] [По-батькові] — surname + patronymic = one person)
+      if (nameParts.length === 0 && members.length > 0) {
+        const last = members[members.length - 1];
+        if (last.full_name.split(' ').length <= 2) {
+          // Append patronymic to last member
+          last.full_name += ' ' + tk.value;
+          continue;
+        }
+      }
+
+      nameParts.push(tk.value);
+      // Patronymic completes a name — peek ahead for date
+      const next = tokens[i + 1];
+      if (next && next.type === 'date') {
+        date = next.value;
+        i++; // consume date
+      }
+      flush();
+      continue;
+    }
+  }
+
+  flush();
+
+  // Post-process: merge single-word entries into proper names
+  // If a member has only surname = ownerSurname, it's likely just a repeat — remove
+  const cleaned = members.filter(m => {
+    if (m.full_name === ownerSurname && !m.birth_year && m.relation === null) return false;
+    return true;
+  });
+
+  return cleaned;
 }
 
 function parseFileName(fileName) {
@@ -215,19 +368,11 @@ async function processBook(filePath) {
   for (const [caseNum, pages] of casePages) {
     const allTexts = pages.flatMap(p => p.texts);
     const allContent = allTexts.filter(t => t.trim().length > 1).join(' ');
-    const nameWords = extractNames(allTexts);
-    const fullNames = assembleNames(nameWords);
+    const members = extractMembers(allTexts);
     const address = extractAddress(allTexts);
-    const dates = extractDates(allTexts);
-    const relations = extractRelations(allTexts);
     const landInfo = extractLandInfo(allTexts);
     const properties = extractProperty(allTexts);
-    const ownerName = fullNames.length > 0 ? fullNames[0] : null;
-    const members = fullNames.map((name, i) => ({
-      full_name: name,
-      birth_year: dates[i] ? parseInt(dates[i].split('.')[2]) : null,
-      relation: i === 0 ? 'голова' : (relations[i] || null),
-    }));
+    const ownerName = members.length > 0 ? members[0].full_name : null;
     const [bookPart, casePart] = caseNum.split('-');
 
     results.push({
