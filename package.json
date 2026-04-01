@@ -1,0 +1,9 @@
+{
+  "name": "starostat-helper",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "docxtemplater": "^3.68.3",
+    "pizzip": "^3.2.0"
+  }
+}

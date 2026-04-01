@@ -1,0 +1,58 @@
+{
+  "id": "akt-prozhyvannya",
+  "name": "Акт про проживання без реєстрації",
+  "description": "Підтверджує фактичне проживання особи за адресою без реєстрації місця проживання",
+  "when_needed": "Для реєстрації місця проживання, отримання соціальних послуг, для суду, ЦНАП",
+  "required_data": {
+    "PIB": {
+      "label": "ПІБ особи, яка проживає без реєстрації",
+      "example": "Босак Наталія Іванівна",
+      "required": true
+    },
+    "birth_date": {
+      "label": "Дата народження",
+      "example": "15.03.1978",
+      "required": true
+    },
+    "village": {
+      "label": "Село",
+      "example": "Ременів",
+      "required": true
+    },
+    "street": {
+      "label": "Вулиця",
+      "example": "Північна",
+      "required": true
+    },
+    "house_num": {
+      "label": "Номер будинку",
+      "example": "1",
+      "required": true
+    },
+    "commission_member": {
+      "label": "Третій член комісії (ПІБ, посада)",
+      "example": "депутата сільської ради Гришана Андрія Юрійовича",
+      "required": true
+    },
+    "commission_member_short": {
+      "label": "Скорочене ПІБ третього члена",
+      "example": "Гришан А.Ю.",
+      "required": true
+    },
+    "additional_info": {
+      "label": "Додаткова інформація",
+      "example": "Особа проживає з 2020 року. Підтверджено сусідами.",
+      "required": false
+    },
+    "day": { "label": "День", "auto": true },
+    "month": { "label": "Місяць (словом)", "auto": true },
+    "year": { "label": "Рік", "auto": true }
+  },
+  "source_documents": [
+    "Паспорт особи",
+    "Свідчення сусідів/свідків"
+  ],
+  "signing": "Староста + діловод + депутат (або інший член комісії)",
+  "stamp": true,
+  "registration": "Додаток 1 до Порядку видачі довідок про місце проживання"
+}

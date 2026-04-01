@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "api/templates.js": {
+      "includeFiles": "kb/doc-forms/**"
+    },
+    "api/generate.js": {
+      "includeFiles": "kb/templates/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/templates", "destination": "/api/templates" },
+    { "source": "/api/generate", "destination": "/api/generate" }
+  ]
+}

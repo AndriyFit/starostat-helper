@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Документи — Ременівський округ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white; padding: 20px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .header h1 { font-size: 22px; font-weight: 600; }
+    .header p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+
+    .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+
+    /* Step indicator */
+    .steps { display: flex; gap: 8px; margin-bottom: 24px; }
+    .step {
+      flex: 1; padding: 10px; text-align: center; border-radius: 8px;
+      background: #e0e0e0; font-size: 13px; font-weight: 500; color: #666;
+      transition: all 0.3s;
+    }
+    .step.active { background: #1a237e; color: white; }
+    .step.done { background: #4caf50; color: white; }
+
+    /* Cards */
+    .card {
+      background: white; border-radius: 12px; padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 16px;
+    }
+    .card h2 { font-size: 18px; margin-bottom: 16px; color: #1a237e; }
+
+    /* Template list */
+    .template-list { display: grid; gap: 10px; }
+    .template-item {
+      padding: 16px; border: 2px solid #e8eaf6; border-radius: 10px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .template-item:hover { border-color: #1a237e; background: #f5f5ff; }
+    .template-item.selected { border-color: #1a237e; background: #e8eaf6; }
+    .template-item h3 { font-size: 15px; margin-bottom: 4px; }
+    .template-item p { font-size: 12px; color: #666; }
+    .template-item .when { font-size: 11px; color: #888; margin-top: 6px; font-style: italic; }
+
+    /* Form */
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-size: 13px; font-weight: 600;
+      margin-bottom: 4px; color: #333;
+    }
+    .form-group .hint { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 10px 12px; border: 1.5px solid #ddd;
+      border-radius: 8px; font-size: 14px; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-color: #1a237e;
+    }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .form-group .required::after { content: ' *'; color: #e53935; }
+
+    /* Buttons */
+    .btn {
+      padding: 12px 28px; border: none; border-radius: 8px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: #1a237e; color: white; }
+    .btn-primary:hover { background: #283593; }
+    .btn-secondary { background: #e0e0e0; color: #333; }
+    .btn-secondary:hover { background: #ccc; }
+    .btn-success { background: #4caf50; color: white; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .actions { display: flex; gap: 12px; margin-top: 24px; }
+
+    /* Info box */
+    .info-box {
+      background: #e3f2fd; border-left: 4px solid #1a237e;
+      padding: 12px 16px; border-radius: 0 8px 8px 0;
+      font-size: 13px; margin-bottom: 16px;
+    }
+
+    /* Loading */
+    .spinner { display: inline-block; width: 20px; height: 20px;
+      border: 2px solid #fff; border-top: 2px solid transparent;
+      border-radius: 50%; animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 12px; margin: 16px auto; }
+      .card { padding: 16px; }
+      .steps { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Формування документів</h1>
+  <p>Ременівський старостинський округ | Жовтанецька сільська рада</p>
+</div>
+
+<div class="container">
+  <!-- Steps -->
+  <div class="steps">
+    <div class="step active" id="step1-ind">1. Тип документа</div>
+    <div class="step" id="step2-ind">2. Заповнення даних</div>
+    <div class="step" id="step3-ind">3. Завантаження</div>
+  </div>
+
+  <!-- Step 1: Select template -->
+  <div id="step1" class="card">
+    <h2>Оберіть тип документа</h2>
+    <div id="template-list" class="template-list">
+      <p>Завантаження...</p>
+    </div>
+  </div>
+
+  <!-- Step 2: Fill data -->
+  <div id="step2" class="card hidden">
+    <h2 id="form-title"></h2>
+    <div id="form-info" class="info-box"></div>
+    <form id="doc-form"></form>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="goStep(1)">Назад</button>
+      <button class="btn btn-primary" onclick="generateDoc()" id="btn-generate">
+        Сформувати документ
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 3: Download -->
+  <div id="step3" class="card hidden">
+    <h2>Документ готовий!</h2>
+    <p style="margin-bottom: 16px;">Файл сформовано. Натисніть щоб завантажити.</p>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="goStep(1)">Новий документ</button>
+      <a id="download-link" class="btn btn-success" download>Завантажити .docx</a>
+    </div>
+  </div>
+</div>
+
+<script>
+let templates = [];
+let selectedTemplate = null;
+
+// Load templates
+async function loadTemplates() {
+  const res = await fetch('/api/templates');
+  const data = await res.json();
+  templates = data.templates;
+  renderTemplates();
+}
+
+function renderTemplates() {
+  const list = document.getElementById('template-list');
+  list.innerHTML = templates.map(t => `
+    <div class="template-item" onclick="selectTemplate('${t.id}')">
+      <h3>${t.name}</h3>
+      <p>${t.description}</p>
+      <div class="when">${t.when_needed}</div>
+    </div>
+  `).join('');
+}
+
+function selectTemplate(id) {
+  selectedTemplate = templates.find(t => t.id === id);
+  document.querySelectorAll('.template-item').forEach(el => el.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+
+  setTimeout(() => goStep(2), 200);
+}
+
+function goStep(num) {
+  document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active', 'done'));
+
+  for (let i = 1; i < num; i++) {
+    document.getElementById('step' + i + '-ind').classList.add('done');
+  }
+  document.getElementById('step' + num + '-ind').classList.add('active');
+  document.getElementById('step' + num).classList.remove('hidden');
+
+  if (num === 2 && selectedTemplate) renderForm();
+}
+
+function renderForm() {
+  const t = selectedTemplate;
+  document.getElementById('form-title').textContent = t.name;
+
+  let infoHtml = '';
+  if (t.source_documents) infoHtml += '<b>Джерела даних:</b> ' + t.source_documents.join(', ');
+  if (t.signing) infoHtml += '<br><b>Підписує:</b> ' + t.signing;
+  if (t.notes) infoHtml += '<br><b>Примітка:</b> ' + t.notes;
+  document.getElementById('form-info').innerHTML = infoHtml;
+
+  const form = document.getElementById('doc-form');
+  form.innerHTML = '';
+
+  for (const [key, field] of Object.entries(t.required_data)) {
+    if (field.auto) continue; // skip auto-filled fields
+
+    const isRequired = field.required;
+    const isLong = key === 'members' || key === 'results' || key === 'commission'
+      || key === 'body' || key === 'response_text' || key === 'additional_info'
+      || key === 'signatures' || key === 'conclusion';
+
+    const group = document.createElement('div');
+    group.className = 'form-group';
+
+    let labelClass = isRequired ? 'required' : '';
+    let html = `<label class="${labelClass}">${field.label}</label>`;
+    if (field.note) html += `<div class="hint">${field.note}</div>`;
+    if (field.example) html += `<div class="hint">Приклад: ${field.example}</div>`;
+
+    if (isLong) {
+      html += `<textarea name="${key}" placeholder="${field.example || ''}" ${isRequired ? 'required' : ''}>${field.default || ''}</textarea>`;
+    } else {
+      html += `<input type="text" name="${key}" value="${field.default || ''}" placeholder="${field.example || ''}" ${isRequired ? 'required' : ''}>`;
+    }
+
+    group.innerHTML = html;
+    form.appendChild(group);
+  }
+}
+
+async function generateDoc() {
+  const btn = document.getElementById('btn-generate');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Формування...';
+
+  const form = document.getElementById('doc-form');
+  const formData = new FormData(form);
+  const data = {};
+  for (const [key, value] of formData.entries()) {
+    if (value.trim()) data[key] = value.trim();
+  }
+
+  try {
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ templateId: selectedTemplate.id, data }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || 'Помилка генерації');
+    }
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const link = document.getElementById('download-link');
+    link.href = url;
+    link.download = `${selectedTemplate.id}_${new Date().toISOString().split('T')[0]}.docx`;
+
+    goStep(3);
+  } catch (err) {
+    alert('Помилка: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Сформувати документ';
+  }
+}
+
+loadTemplates();
+</script>
+
+</body>
+</html>

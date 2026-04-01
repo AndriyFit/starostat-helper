@@ -1,0 +1,1083 @@
+{
+  "crawled": {
+    "https://zhovtanetska-gromada.gov.ua": {
+      "status": "saved",
+      "title": "ВІТАЄМО ВАС НА ОФІЦІЙНОМУ ВЕБ-САЙТІ ЖОВТАНЕЦЬКОЇ ТЕРИТОРІАЛЬНОЇ ГРОМАДИ!",
+      "category": "info",
+      "date": "2026-03-30T13:38:21.166Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news": {
+      "status": "saved",
+      "title": "Новини",
+      "category": "news",
+      "date": "2026-03-30T13:38:23.133Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/cnap-12-57-19-06-11-2020": {
+      "status": "saved",
+      "title": "Центр надання адміністративних послуг (ЦНАП) Жовтанецької сільської ради",
+      "category": "services",
+      "date": "2026-03-30T13:38:25.099Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-cnapu-16-27-28-23-02-2021": {
+      "status": "saved",
+      "title": "ПЕРЕЛІК адміністративних послуг, які надаються через Центр надання адміністративних послуг Жовтанецької  сільської ради",
+      "category": "services",
+      "date": "2026-03-30T13:38:27.004Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-cnapu-u-starostinskih-okrugah-14-41-00-24-02-2021": {
+      "status": "saved",
+      "title": "Послуги ЦНАПу  у старостинських округах",
+      "category": "services",
+      "date": "2026-03-30T13:38:29.062Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/deputatskij-korpus-15-36-44-12-04-2024": {
+      "status": "saved",
+      "title": "Депутатський корпус Жовтанецької сільської ради VIII скликання",
+      "category": "structure",
+      "date": "2026-03-30T13:38:31.329Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/vikonavchij-komitet-15-42-11-12-04-2024": {
+      "status": "saved",
+      "title": "Список членів виконавчого комітету Жовтанецької сільської ради VIII скликання",
+      "category": "structure",
+      "date": "2026-03-30T13:38:33.553Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/ekonomika-gromadi-15-18-23-29-05-2017": {
+      "status": "saved",
+      "title": "Основні економічні показники",
+      "category": "budget",
+      "date": "2026-03-30T13:38:35.804Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/osvita-11-30-40-20-04-2017": {
+      "status": "saved",
+      "title": "Відділ освіти Жовтанецької сільської ради",
+      "category": "education",
+      "date": "2026-03-30T13:38:38.143Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/ohorona-zdorovya-10-40-20-22-09-2017": {
+      "status": "saved",
+      "title": "Охорона здоров'я",
+      "category": "healthcare",
+      "date": "2026-03-30T13:38:40.331Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/sektor-kulturi-molodi-ta-sportu-22-30-27-03-04-2017": {
+      "status": "saved",
+      "title": "Народні доми та бібліотеки громади",
+      "category": "culture",
+      "date": "2026-03-30T13:38:42.586Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/civilnij-zahist-10-32-00-01-03-2021": {
+      "status": "saved",
+      "title": "ЦИВІЛЬНИЙ ЗАХИСТ",
+      "category": "emergency",
+      "date": "2026-03-30T13:38:44.805Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/informaciya-dlya-vpo-15-29-02-01-12-2025": {
+      "status": "empty",
+      "title": "Інформація для ВПО",
+      "category": "idp",
+      "date": "2026-03-30T13:38:47.074Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/strategiya-rozvitku-zhovtaneckoi-otg-na-period-do-2027-roku-15-20-26-15-05-2020": {
+      "status": "empty",
+      "title": "СТРАТЕГІЯ РОЗВИТКУ ЖОВТАНЕЦЬКОЇ ГРОМАДИ",
+      "category": "strategy",
+      "date": "2026-03-30T13:38:49.275Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/kontakti-ta-rozporyadok-dnya-12-21-34-27-03-2026": {
+      "status": "empty",
+      "title": "Контакти та розпорядок дня",
+      "category": "contacts",
+      "date": "2026-03-30T13:38:51.221Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/struktura-12-20-12-27-03-2026": {
+      "status": "empty",
+      "title": "Структура",
+      "category": "contacts",
+      "date": "2026-03-30T13:38:53.452Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/pro-organ-12-18-11-27-03-2026": {
+      "status": "empty",
+      "title": "Про орган",
+      "category": "info",
+      "date": "2026-03-30T13:38:55.689Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/dostup-do-publichnoi-informacii-20-10-57-03-04-2017": {
+      "status": "saved",
+      "title": "Запит на інформацію",
+      "category": "info",
+      "date": "2026-03-30T13:38:57.988Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/zvernennya-gromadyan-09-36-38-11-07-2017": {
+      "status": "saved",
+      "title": "Вітаємо Вас на консультативній веб-сторінці роботи із зверненнями громадян Жовтанецької сільської ради",
+      "category": "appeals",
+      "date": "2026-03-30T13:39:00.287Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/telefoni-pershoi-neobhidnosti-12-30-08-01-10-2021": {
+      "status": "saved",
+      "title": "Телефони першої необхідності",
+      "category": "info",
+      "date": "2026-03-30T13:39:02.586Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/bezoplatna-pravnicha-dopomoga-10-40-55-30-05-2024": {
+      "status": "saved",
+      "title": "Безоплатна правнича допомога",
+      "category": "info",
+      "date": "2026-03-30T13:39:04.842Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/sluzhba-u-spravah-ditej-11-13-01-27-01-2022": {
+      "status": "saved",
+      "title": "Служба у справах дітей",
+      "category": "info",
+      "date": "2026-03-30T13:39:07.114Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/policejskij-oficer-zhovtaneckoi-tg-17-47-13-12-04-2021": {
+      "status": "empty",
+      "title": "Поліцейські офіцери Жовтанецької ТГ",
+      "category": "info",
+      "date": "2026-03-30T13:39:09.288Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/protidiya-domashnomu-nasilstvu-16-07-00-16-11-2023": {
+      "status": "empty",
+      "title": "Протидія домашньому насильству",
+      "category": "info",
+      "date": "2026-03-30T13:39:11.423Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/kp-gospodar-09-33-47-27-06-2018": {
+      "status": "saved",
+      "title": "Комунальне підприємство \"Господар\"",
+      "category": "info",
+      "date": "2026-03-30T13:39:13.684Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/upravlinnya-vidhodami-15-35-13-01-12-2025": {
+      "status": "empty",
+      "title": "Управління відходами",
+      "category": "info",
+      "date": "2026-03-30T13:39:15.926Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/medichni-poslugi-yaki-nadajutsya-v-knp-cpmsd-zhovtaneckoi-silskoi-radi-15-40-04-16-02-2021": {
+      "status": "saved",
+      "title": "Основні медичні послуги, які надаються в КНП ЦПМСД Жовтанецької сільської ради",
+      "category": "services",
+      "date": "2026-03-30T13:39:18.002Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/grafik-roboti-zakladiv-ohoroni-zdorov'ya-zhovtaneckoi-silskoi-radi-14-37-45-24-06-2021": {
+      "status": "error",
+      "date": "2026-03-30T13:39:20.008Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/mistobudivna-dokumentaciya-10-32-46-23-10-2024": {
+      "status": "saved",
+      "title": "Стратегічна екологічна оцінка",
+      "category": "info",
+      "date": "2026-03-30T13:39:22.113Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/dopomoga-zsu-11-51-42-03-06-2025": {
+      "status": "saved",
+      "title": "Допомога ЗСУ",
+      "category": "info",
+      "date": "2026-03-30T13:39:24.338Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/molodizhna-rada-16-54-55-13-12-2023": {
+      "status": "saved",
+      "title": "Молодіжна рада при Жовтанецькій сільській раді",
+      "category": "info",
+      "date": "2026-03-30T13:39:26.564Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/komunalne-majno-11-53-29-30-11-2021": {
+      "status": "saved",
+      "title": "Реєстр комунального майна",
+      "category": "info",
+      "date": "2026-03-30T13:39:28.807Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/vakansii-12-24-15-27-03-2026": {
+      "status": "empty",
+      "title": "Вакансії",
+      "category": "vacancies",
+      "date": "2026-03-30T13:39:30.988Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/pochesni-meshkanci-zhovtaneckoi-teritorialnoi-gromadi-14-55-22-15-04-2024": {
+      "status": "saved",
+      "title": "Почесні мешканці Жовтанецької територіальної громади",
+      "category": "info",
+      "date": "2026-03-30T13:39:33.083Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/istorichni-pamyatki-17-01-01-11-04-2024": {
+      "status": "saved",
+      "title": "Об'єкти культурної спадщини Жовтанецької територіальної громади",
+      "category": "info",
+      "date": "2026-03-30T13:39:34.944Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs": {
+      "status": "saved",
+      "title": "Рішення і проєкти рішень сільської ради та виконавчого комітету",
+      "category": "info",
+      "date": "2026-03-30T13:39:37.210Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/prozorro": {
+      "status": "empty",
+      "title": "Список закупівель",
+      "category": "info",
+      "date": "2026-03-30T13:39:39.397Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/openbudget": {
+      "status": "empty",
+      "title": "OpenBudget",
+      "category": "budget",
+      "date": "2026-03-30T13:39:41.669Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/plans": {
+      "status": "empty",
+      "title": "Плани публічних закупівель",
+      "category": "info",
+      "date": "2026-03-30T13:39:43.870Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/all_petitions": {
+      "status": "saved",
+      "title": "Система електронних петицій - Жовтанецька громада",
+      "category": "appeals",
+      "date": "2026-03-30T13:39:45.778Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/53": {
+      "status": "saved",
+      "title": "Деркач Ярослав Степанович - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:39:48.056Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/59": {
+      "status": "saved",
+      "title": "Янишин Степан Васильович - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:39:50.262Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/552": {
+      "status": "saved",
+      "title": "Шульган Віталій Петрович - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:39:52.441Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/99": {
+      "status": "saved",
+      "title": "Димар Марія Романівна - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:39:54.648Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/61": {
+      "status": "saved",
+      "title": "Токар Петро Васильович - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:39:56.866Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/100": {
+      "status": "saved",
+      "title": "Харачко Андрій Миколайович - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:39:59.004Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons": {
+      "status": "saved",
+      "title": "Посадові особи",
+      "category": "info",
+      "date": "2026-03-30T13:40:01.140Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1773218712": {
+      "status": "saved",
+      "title": "Жовтанецька громада -  активний учасник Асоціації «Львівська агломерація»",
+      "category": "news",
+      "date": "2026-03-30T13:40:02.978Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1774534209": {
+      "status": "saved",
+      "title": "Важливо! Тим, хто ще не повідомив про неотримання виплат від рф, потрібно зробити це до 1 квітня 2026 року",
+      "category": "news",
+      "date": "2026-03-30T13:40:05.574Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1773320255": {
+      "status": "saved",
+      "title": "Інформаційне повідомлення про проведення громадського обговорення проєкту рішення Жовтанецької сільської ради Львівського району Львівської області «Про перепрофілювання (зміну типу) Ременівського опорного ЗЗСО»",
+      "category": "news",
+      "date": "2026-03-30T13:40:08.082Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1773310510": {
+      "status": "saved",
+      "title": "Інформаційне повідомлення про проведення громадського обговорення проєкту рішення Жовтанецької сільської ради Львівського району Львівської області «Про перепрофілювання (зміну типу) Великоколоднівського НВК «ЗНЗ І-ІІІ ст. - ДНЗ»",
+      "category": "news",
+      "date": "2026-03-30T13:40:10.468Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772638791": {
+      "status": "saved",
+      "title": "Інформаційне повідомлення про продаж на електронному аукціоні об’єкта малої приватизації",
+      "category": "news",
+      "date": "2026-03-30T13:40:12.382Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772629173": {
+      "status": "saved",
+      "title": "Стартувала інформаційна кампанія «Залиш цю енергію для себе!»",
+      "category": "news",
+      "date": "2026-03-30T13:40:14.906Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772805183": {
+      "status": "saved",
+      "title": "Слава нашому Герою та вічна пам'ять!",
+      "category": "news",
+      "date": "2026-03-30T13:40:17.320Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772804711": {
+      "status": "saved",
+      "title": "Назавжди у пам'яті громади: Наремба Тарас Ярославович",
+      "category": "news",
+      "date": "2026-03-30T13:40:19.183Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2285646": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №33/60 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:21.330Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2263334": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1-69 «Рішення 59 сесії від 10.02.2026 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:23.609Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2255825": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №4/32 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:25.844Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2255811": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №1/3 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:28.028Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2218892": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1/93 «Рішення 58 сесії від 18.12.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:30.268Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2218890": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №302/333 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:32.419Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2218888": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №299/301 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:34.643Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2194466": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1-56 «Рішення 57 сесії від 27.11.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:40:36.817Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1774874267": {
+      "status": "saved",
+      "title": "Важливо!",
+      "category": "news",
+      "date": "2026-03-30T13:40:38.665Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1774604092": {
+      "status": "saved",
+      "title": "Повідомлення про оприлюднення Проекту детального плану території колишнього господарського двору біля села Честині, на якій знаходиться земельна ділянка площею 2,0000 га, кадастровий номер ділянки 4622181200:08:000:0468, з метою деталізації плануваль",
+      "category": "news",
+      "date": "2026-03-30T13:40:41.085Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1774428757": {
+      "status": "saved",
+      "title": "Повідомлення про оприлюднення Проєкту детального плану території земельної ділянки з прилеглих земель до ТзОВ «Якимів Фіш» з метою діяльності рибного господарства (аквакультура) біля села Якимів Жовтанецької сільської ради та звіту про стратегічну ек",
+      "category": "news",
+      "date": "2026-03-30T13:40:43.519Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/reestraciyaznyattya-z-reestracii-meshkanciv-16-47-38-23-02-2021": {
+      "status": "saved",
+      "title": "Реєстрація/зняття з реєстрації мешканців",
+      "category": "info",
+      "date": "2026-03-30T13:40:45.768Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-u-sferi-derzhavnoi-reestracii-aktiv-civilnogo-stanu-16-48-20-23-02-2021": {
+      "status": "saved",
+      "title": "Послуги у сфері державної реєстрації актів цивільного стану",
+      "category": "services",
+      "date": "2026-03-30T13:40:47.968Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/notarialni-dii-scho-vchinyajutsya-posadovimi-osobami-organiv-miscevogo-samovryaduvannya-u-naselenih-punktah-de-nemae-notariusiv-16-49-17-23-02-2021": {
+      "status": "saved",
+      "title": "Нотаріальні дії, що вчиняються посадовими особами органів місцевого самоврядування у населених пунктах, де немає нотаріусів",
+      "category": "info",
+      "date": "2026-03-30T13:40:50.101Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/reestraciya-neruhomosti-16-50-30-23-02-2021": {
+      "status": "saved",
+      "title": "Реєстрація нерухомості",
+      "category": "info",
+      "date": "2026-03-30T13:40:52.209Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/pitannya-miscevogo-znachennya-16-53-25-23-02-2021": {
+      "status": "saved",
+      "title": "Питання місцевого значення",
+      "category": "info",
+      "date": "2026-03-30T13:40:54.445Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-socialnogo-harakteru-16-54-26-23-02-2021": {
+      "status": "saved",
+      "title": "Послуги соціального характеру",
+      "category": "services",
+      "date": "2026-03-30T13:40:56.695Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/zemelni-pitannya-17-30-48-06-09-2023": {
+      "status": "saved",
+      "title": "Земельні питання",
+      "category": "info",
+      "date": "2026-03-30T13:40:59.116Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/derzhavna-reestraciya-juridichnih-osib-fizichnih-osib-%E2%80%93-pidpriemciv-16-57-05-23-02-2021": {
+      "status": "saved",
+      "title": "Державна реєстрація юридичних осіб, фізичних осіб – підприємців *",
+      "category": "info",
+      "date": "2026-03-30T13:41:01.452Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/pasportni-poslugi-16-57-52-23-02-2021": {
+      "status": "saved",
+      "title": "Паспортні послуги",
+      "category": "services",
+      "date": "2026-03-30T13:41:03.747Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/arhitektura-ta-mistobuduvannya-16-59-11-23-02-2021": {
+      "status": "saved",
+      "title": "Архітектура та містобудування",
+      "category": "info",
+      "date": "2026-03-30T13:41:05.668Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-yaki-nadajutsya-cherez-sluzhbu-u-spravah-ditej-17-35-14-06-09-2023": {
+      "status": "saved",
+      "title": "Послуги які надаються через службу у справах дітей",
+      "category": "services",
+      "date": "2026-03-30T13:41:07.584Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-dlya-veteraniv-16-25-38-28-07-2025": {
+      "status": "saved",
+      "title": "Послуги для ветеранів",
+      "category": "services",
+      "date": "2026-03-30T13:41:09.808Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/poslugi-yaki-nadajutsya-cherez-kz-centr-nadannya-socialnih-poslug-16-19-55-28-07-2025": {
+      "status": "saved",
+      "title": "Послуги які надаються через КЗ \"Центр надання соціальних послуг\"",
+      "category": "services",
+      "date": "2026-03-30T13:41:11.817Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/pitannya-miscevogo-znachennya-16-16-50-28-07-2025": {
+      "status": "saved",
+      "title": "Питання місцевого значення",
+      "category": "info",
+      "date": "2026-03-30T13:41:14.198Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/inshi-administrativni-poslugi-16-30-00-28-07-2025": {
+      "status": "saved",
+      "title": "Інші адміністративні послуги",
+      "category": "services",
+      "date": "2026-03-30T13:41:16.387Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1596544838": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за І півріччя 2020 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:18.869Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1589544595": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за І квартал 2020 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:21.146Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1581415545": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за 2019 рік",
+      "category": "news",
+      "date": "2026-03-30T13:41:23.645Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1582203837": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за 9 місяців 2019 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:26.094Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563285930": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за І півріччя 2019 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:28.533Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563285823": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за І квартал 2019 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:31.160Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563285790": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за  2018 рік",
+      "category": "news",
+      "date": "2026-03-30T13:41:33.599Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563285735": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за 9 місяців 2018 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:36.039Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563285705": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за І півріччя 2018 року",
+      "category": "news",
+      "date": "2026-03-30T13:41:38.517Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563285647": {
+      "status": "saved",
+      "title": "Звіт про виконання бюджету за  2017 рік",
+      "category": "news",
+      "date": "2026-03-30T13:41:40.966Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1622204805": {
+      "status": "saved",
+      "title": "Як налагодити освітній процес в умовах дистанційного навчання",
+      "category": "news",
+      "date": "2026-03-30T13:41:43.389Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1621596767": {
+      "status": "saved",
+      "title": "Медики КНП ЦПМСД Жовтанецької сільської ради провели лекцію-практикум  у Ременівському ЗЗСО",
+      "category": "news",
+      "date": "2026-03-30T13:41:45.897Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1621524722": {
+      "status": "saved",
+      "title": "Директор Департаменту освіти і науки ЛОДА з робочим візитом відвідав Ременівський ЗЗСО",
+      "category": "news",
+      "date": "2026-03-30T13:41:48.351Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1621434210": {
+      "status": "saved",
+      "title": "Пожежники-рятувальники МПК Жовтанецької сільської ради навчали школярів Колоденецької ЗОШ правилам пожежної безпеки",
+      "category": "news",
+      "date": "2026-03-30T13:41:50.875Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1621433641": {
+      "status": "saved",
+      "title": "«Безпека руху – це життя» - Тиждень безпеки в Ременівському ЗЗСО",
+      "category": "news",
+      "date": "2026-03-30T13:41:53.409Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1620941160": {
+      "status": "saved",
+      "title": "Національний університет \"Львівська політехніка\" запрошує випускників 9-их класів на \"ДЕНЬ ВІДКРИТИХ ДВЕРЕЙ\"",
+      "category": "news",
+      "date": "2026-03-30T13:41:55.931Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1620718644": {
+      "status": "saved",
+      "title": "Медичні огляди школярів. Роз’яснення НСЗУ 8.05.21",
+      "category": "news",
+      "date": "2026-03-30T13:41:58.230Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1620304703": {
+      "status": "saved",
+      "title": "Великоколоднівський НВК запрошує випускників 9-их класів на навчання у 10-ий клас",
+      "category": "news",
+      "date": "2026-03-30T13:42:00.781Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1620220349": {
+      "status": "saved",
+      "title": "Ременівський ЗЗСО запрошує випускників 9-их класів на навчання в ІННОВАЦІЙНОМУ 10-му класі",
+      "category": "news",
+      "date": "2026-03-30T13:42:03.223Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1599639325": {
+      "status": "saved",
+      "title": "Графік руху шкільних автобусів у Жовтанецькій ОТГ",
+      "category": "news",
+      "date": "2026-03-30T13:42:05.731Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1542360988": {
+      "status": "saved",
+      "title": "Підписання декларації з лікарем",
+      "category": "news",
+      "date": "2026-03-30T13:42:08.161Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1542360847": {
+      "status": "saved",
+      "title": "Програма \"Доступні ліки\"",
+      "category": "news",
+      "date": "2026-03-30T13:42:10.666Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1702479252": {
+      "status": "saved",
+      "title": "Зразковий аматорський дитячий хор \"Аксіос\" Народного дому села Жовтанці",
+      "category": "news",
+      "date": "2026-03-30T13:42:13.081Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1702479073": {
+      "status": "saved",
+      "title": "Народний аматорський хор ім.Євгена Козака Народного дому села Велике Колодно",
+      "category": "news",
+      "date": "2026-03-30T13:42:15.560Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1702478925": {
+      "status": "saved",
+      "title": "Народний аматорський хореографічний колектив «Життя в танці» Народного дому села Жовтанці",
+      "category": "news",
+      "date": "2026-03-30T13:42:17.953Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1619073074": {
+      "status": "saved",
+      "title": "До уваги громадян!",
+      "category": "news",
+      "date": "2026-03-30T13:42:20.488Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1618476480": {
+      "status": "saved",
+      "title": "Представники Жовтанецької ТГ взяли участь нараді з питань цивільного захисту",
+      "category": "news",
+      "date": "2026-03-30T13:42:23.020Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1617709560": {
+      "status": "saved",
+      "title": "Обговорення попередження пожеж в екосистемах на території громади із працівниками Кам'янка-Бузького РВ ДСНС",
+      "category": "news",
+      "date": "2026-03-30T13:42:25.542Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1616747089": {
+      "status": "saved",
+      "title": "Дії при сигналі \"УВАГА ВСІМ!\"",
+      "category": "news",
+      "date": "2026-03-30T13:42:27.990Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1615884644": {
+      "status": "saved",
+      "title": "Кам'янка-Бузький РВ ГУ ДСНС інформує про зміни до кодексу України про адміністративні правопорушення за порушення правил пожежної безпеки",
+      "category": "news",
+      "date": "2026-03-30T13:42:30.336Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/59379": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №36/5 «Про утворення комунального підприємства “Господар” Жовтанецької сільської ради»",
+      "category": "regulations",
+      "date": "2026-03-30T13:42:32.593Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1568720532": {
+      "status": "saved",
+      "title": "Повідомлення про затвердження тарифів на послуги з централізованого водопостачання та водовідведення",
+      "category": "news",
+      "date": "2026-03-30T13:42:35.096Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1563973312": {
+      "status": "saved",
+      "title": "Фінансова звітність КП \"Господар\"  за І півріччя 2019 року",
+      "category": "news",
+      "date": "2026-03-30T13:42:37.299Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1760079066": {
+      "status": "saved",
+      "title": "Повідомлення про оприлюднення заяви про визначення обсягу стратегічної екологічної оцінки містобудівної документації",
+      "category": "news",
+      "date": "2026-03-30T13:42:39.730Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1760078852": {
+      "status": "saved",
+      "title": "Заява про визначення обсягу стратегічної екологічної оцінки",
+      "category": "news",
+      "date": "2026-03-30T13:42:42.037Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1759749892": {
+      "status": "saved",
+      "title": "ПОВІДОМЛЕННЯ про оприлюднення Заяви про визначення обсягу стратегічної екологічної оцінки  проєкту Стратегії розвитку Жовтанецької сільської територіальної громади на період до 2027 року (з перспективою дії до 2034 року) та Плану заходів на 2026-2027",
+      "category": "news",
+      "date": "2026-03-30T13:42:44.456Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1729669625": {
+      "status": "saved",
+      "title": "Заява про визначення обсягу стратегічної екологічної оцінки від 22.10.2024 р.",
+      "category": "news",
+      "date": "2026-03-30T13:42:46.925Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1718099372": {
+      "status": "saved",
+      "title": "Повідомлення про оприлюднення Заяви про визначення обсягу СЕО",
+      "category": "news",
+      "date": "2026-03-30T13:42:49.190Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772801559": {
+      "status": "saved",
+      "title": "Почесна відзнака від командування 24-ї окремої механізованої бригади імені короля Данила!",
+      "category": "news",
+      "date": "2026-03-30T13:42:51.645Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772792966": {
+      "status": "saved",
+      "title": "Разом до перемоги!",
+      "category": "news",
+      "date": "2026-03-30T13:42:54.096Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772792577": {
+      "status": "saved",
+      "title": "Разом до перемоги!",
+      "category": "news",
+      "date": "2026-03-30T13:42:56.284Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772631082": {
+      "status": "saved",
+      "title": "Активно підтримуємо захисників!",
+      "category": "news",
+      "date": "2026-03-30T13:42:58.650Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772630965": {
+      "status": "saved",
+      "title": "Активно працюємо задля перемоги!",
+      "category": "news",
+      "date": "2026-03-30T13:43:00.903Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772629954": {
+      "status": "saved",
+      "title": "​Підтримка, що наближає перемогу: чергова допомога для наших захисників!",
+      "category": "news",
+      "date": "2026-03-30T13:43:03.311Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1772119945": {
+      "status": "saved",
+      "title": "Подяка від 80 окремої десантно-штурмової Галицької бригади",
+      "category": "news",
+      "date": "2026-03-30T13:43:05.158Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1767797604": {
+      "status": "saved",
+      "title": "Разом до перемоги: чергові запити наших захисників виконано!",
+      "category": "news",
+      "date": "2026-03-30T13:43:07.528Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1767791850": {
+      "status": "saved",
+      "title": "Разом до перемоги!",
+      "category": "news",
+      "date": "2026-03-30T13:43:10.032Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1767363747": {
+      "status": "saved",
+      "title": "Разом до перемоги!",
+      "category": "news",
+      "date": "2026-03-30T13:43:12.506Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1638278113": {
+      "status": "saved",
+      "title": "Оголошення  про передачу майна в оренду",
+      "category": "news",
+      "date": "2026-03-30T13:43:15.211Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1712844586": {
+      "status": "saved",
+      "title": "Церква Непорочного Зачаття Пр.Богородиці с.Вислобоки 1762",
+      "category": "news",
+      "date": "2026-03-30T13:43:17.599Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1712844428": {
+      "status": "saved",
+      "title": "Каплиця-ротонда села Новий Став",
+      "category": "news",
+      "date": "2026-03-30T13:43:20.052Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2187764": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №280/298 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:22.221Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2189560": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1 «Проект місцевого бюджету Жовтанецької сільської ради на 2026 рік»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:24.340Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2168741": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №248-277 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:26.442Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2159330": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1/32 «Рішення 56 сесії від 20.10.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:28.681Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2148705": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №244-247 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:30.933Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2134289": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №224/243 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:33.126Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2121601": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №222/223 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:35.414Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2121597": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1-51 «Рішення 55 сесії від 11.09.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:37.713Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2110568": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №188/221 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:39.836Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2110522": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №186/187 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:42.005Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2088827": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1/65 «Рішення 54 сесії від 12.08.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:44.239Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2086010": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №158/185 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:46.450Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2085999": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №154/157 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:48.764Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2053732": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №133/153 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:51.030Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2053737": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1-60 «Рішення 53 сесії від 25.06.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:53.283Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2053699": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №131/132 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:55.437Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2031735": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №128/130 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:57.692Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2031023": {
+      "status": "saved",
+      "title": "Проєкт рішення сесії сільської ради №0 «Про встановлення місцевих податків і зборів на 2026 рік»",
+      "category": "regulations",
+      "date": "2026-03-30T13:43:59.901Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2030387": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №103/127 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:44:01.994Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2019337": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1-37 «Рішення 52 сесії від 19.05.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:44:04.290Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2003220": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №82-102 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:44:06.503Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/1987478": {
+      "status": "saved",
+      "title": "Рішення сесії сільської ради №1-64 «Рішення 51 сесії від 11.04.2025 р.»",
+      "category": "regulations",
+      "date": "2026-03-30T13:44:08.787Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/2003216": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №80-81 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:44:11.148Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/docs/1975274": {
+      "status": "saved",
+      "title": "Рішення виконавчого комітету №57-79 «Рішення виконавчого комітету»",
+      "category": "regulations",
+      "date": "2026-03-30T13:44:13.416Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/petition/2025": {
+      "status": "saved",
+      "title": "Регулярне прибирання та зимове посипання піском - електронна петиція",
+      "category": "info",
+      "date": "2026-03-30T13:44:15.807Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/petition/1776": {
+      "status": "saved",
+      "title": "Облаштування зупинки громадського транспоту та пішохідного переходу у Ременові - електронна петиція",
+      "category": "info",
+      "date": "2026-03-30T13:44:18.349Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/petition/1754": {
+      "status": "saved",
+      "title": "Встановлення світлофору в селі Ременів - електронна петиція",
+      "category": "info",
+      "date": "2026-03-30T13:44:20.773Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/petition/1285": {
+      "status": "saved",
+      "title": "Капітальний ремонт головної дороги c. Колоденці - електронна петиція",
+      "category": "info",
+      "date": "2026-03-30T13:44:23.153Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/petition/172": {
+      "status": "saved",
+      "title": "Капітальний ремонт дорожнього плотна в селах: Жовтанці, Вирів, Велике Колодно, Якимів - електронна петиція",
+      "category": "info",
+      "date": "2026-03-30T13:44:25.517Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/appeal/35e9d3ba09b471849cf0e9225802f1800bde85cc": {
+      "status": "saved",
+      "title": "Деркач Ярослав Степанович: звернення #185",
+      "category": "info",
+      "date": "2026-03-30T13:44:27.680Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/persons/551": {
+      "status": "saved",
+      "title": "Яцушко Христина Василівна - публічні звернення",
+      "category": "info",
+      "date": "2026-03-30T13:44:29.960Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/more_news": {
+      "status": "saved",
+      "title": "Оголошення",
+      "category": "info",
+      "date": "2026-03-30T13:44:32.260Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/gromadski-sluhannya-10-12-21-23-10-2024": {
+      "status": "saved",
+      "title": "Громадські слухання та повідомлення",
+      "category": "info",
+      "date": "2026-03-30T13:44:34.572Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1766392681": {
+      "status": "saved",
+      "title": "📢 Оголошення про проведення електронного аукціону з оренди комунального майна",
+      "category": "news",
+      "date": "2026-03-30T13:44:37.089Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1765981962": {
+      "status": "saved",
+      "title": "Повідомлення про плановану діяльність",
+      "category": "news",
+      "date": "2026-03-30T13:44:38.992Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1752139506": {
+      "status": "saved",
+      "title": "⚠️ Увага! Небезпечні метеорологічні явища!",
+      "category": "news",
+      "date": "2026-03-30T13:44:41.358Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1752051619": {
+      "status": "saved",
+      "title": "Громадське обговорення у с. Велике Колодно",
+      "category": "news",
+      "date": "2026-03-30T13:44:43.851Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1751389489": {
+      "status": "saved",
+      "title": "Важливо!",
+      "category": "news",
+      "date": "2026-03-30T13:44:46.253Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1748348274": {
+      "status": "saved",
+      "title": "Залиш ці гроші для себе: енергоефективність допомагає економити щодня",
+      "category": "news",
+      "date": "2026-03-30T13:44:48.651Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1748347292": {
+      "status": "saved",
+      "title": "Головне управління Пенсійного фонду України у Львівській області інформує!",
+      "category": "news",
+      "date": "2026-03-30T13:44:51.144Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1761054302": {
+      "status": "saved",
+      "title": "Повідомлення про оприлюднення Проекту детального плану території земельної ділянки з прилеглих земель до ТзОВ «Якимів Фіш» з метою діяльності рибного господарства (аквакультура) біля села Якимів Жовтанецької сільської ради",
+      "category": "news",
+      "date": "2026-03-30T13:44:53.574Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1741277252": {
+      "status": "saved",
+      "title": "Повідомлення про оприлюднення Детального плану території (ДПТ) та звіту про стратегічну екологічну оцінку (СЕО) для будівництва очисних споруд в урочищі «Бовшів» в с. Ременів Жовтанецької сільської ради Львівського району",
+      "category": "news",
+      "date": "2026-03-30T13:44:56.006Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1736342770": {
+      "status": "saved",
+      "title": "Повідомлення про початок процедури розгляду та врахування пропозицій громадськості у проєкті детального плану території у с. Вислобоки по вул. Січових Стрільців №15",
+      "category": "news",
+      "date": "2026-03-30T13:44:58.453Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1736263866": {
+      "status": "saved",
+      "title": "Повідомлення про початок процедури розгляду та врахування пропозицій громадськості у проєкті детального плану території у с. Вислобоки",
+      "category": "news",
+      "date": "2026-03-30T13:45:00.813Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1731490821": {
+      "status": "saved",
+      "title": "ПОВІДОМЛЕННЯ",
+      "category": "news",
+      "date": "2026-03-30T13:45:03.186Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1730905707": {
+      "status": "saved",
+      "title": "Повідомлення щодо проведення громадського обговорення детального плану території в с. Ременів",
+      "category": "news",
+      "date": "2026-03-30T13:45:05.556Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1730734596": {
+      "status": "saved",
+      "title": "ПОВІДОМЛЕННЯ   про початок процедури розгляду та врахування пропозицій громадськості у проекті детального плану території для будівництва та обслуговування будівель торгівлі по вул. Львівська №8б у с. Жовтанці",
+      "category": "news",
+      "date": "2026-03-30T13:45:08.012Z"
+    },
+    "https://zhovtanetska-gromada.gov.ua/news/1728042571": {
+      "status": "saved",
+      "title": "Оголошення !",
+      "category": "news",
+      "date": "2026-03-30T13:45:10.450Z"
+    }
+  },
+  "lastFullCrawl": "2026-03-30T13:45:11.951Z"
+}
