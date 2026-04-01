@@ -1,17 +1,77 @@
 /**
- * Покращений парсер погосподарських книг XPS → Neon Postgres
- * v2: точне розбиття по домогосподарствах за номером справи,
- * витягування ПІБ, членів, адреси, землі, майна
+ * Парсер погосподарських книг XPS → Supabase
+ * v3: Supabase REST API замість Neon Postgres
  */
 const AdmZip = require('adm-zip');
-const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
+const http = require('http');
 
-const neonConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vault', 'neon-config.json'), 'utf-8'));
-const pool = new Pool({ connectionString: neonConfig.database_url });
-
+const VAULT_KEY = '0pYJRSvF3w0HcDB3Bx38jGvoFukUS20pfYsNhW2nS_s';
 const BOOKS_DIR = path.join(__dirname, 'pgo-books');
+
+let SUPA_URL, SUPA_KEY;
+
+async function getVaultSecret(key) {
+  return new Promise((resolve, reject) => {
+    http.get(`http://127.0.0.1:8400/api/secrets/${key}`, {
+      headers: { 'X-API-Key': VAULT_KEY },
+    }, (res) => {
+      let data = '';
+      res.on('data', (c) => data += c);
+      res.on('end', () => resolve(JSON.parse(data).value));
+    }).on('error', reject);
+  });
+}
+
+function supabasePost(table, body) {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(body);
+    const url = new URL(`${SUPA_URL}/rest/v1/${table}`);
+    const req = https.request(url, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation',
+        'Content-Length': Buffer.byteLength(data),
+      },
+    }, (res) => {
+      let body = '';
+      res.on('data', (c) => body += c);
+      res.on('end', () => {
+        if (res.statusCode >= 400) return reject(new Error(`${res.statusCode}: ${body}`));
+        resolve(JSON.parse(body));
+      });
+    });
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
+
+function supabaseDelete(table) {
+  return new Promise((resolve, reject) => {
+    const url = new URL(`${SUPA_URL}/rest/v1/${table}?id=gt.0`);
+    const req = https.request(url, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+      },
+    }, (res) => {
+      let body = '';
+      res.on('data', (c) => body += c);
+      res.on('end', () => resolve());
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+// ========== XPS PARSING (unchanged logic) ==========
 
 function extractTexts(zip, pageNum) {
   try {
@@ -29,7 +89,6 @@ function getPageCount(zip) {
   return zip.getEntries().filter(e => e.entryName.match(/Documents\/1\/Pages\/\d+\.fpage$/)).length;
 }
 
-// Витягнути номер справи з текстів сторінки
 function extractCaseNum(texts) {
   for (const t of texts) {
     const m = t.match(/(\d{2})\s*-\s*(\d{4})/);
@@ -38,9 +97,7 @@ function extractCaseNum(texts) {
   return null;
 }
 
-// Витягнути ПІБ (Прізвище Ім'я По-батькові)
 function extractNames(texts) {
-  // Слова-шаблони з форми, які НЕ є іменами
   const NOISE = new Set([
     'Відмітка', 'Адреса', 'Місце', 'Прізвище', 'Стать', 'Число', 'Родинні',
     'Наявність', 'Загальна', 'Житлова', 'Кількість', 'Хутрові', 'Кролі',
@@ -51,24 +108,17 @@ function extractNames(texts) {
     'Попереднє', 'Нюються', 'Нено', 'Маються',
   ]);
   const namePattern = /^[А-ЯІЇЄҐ][а-яіїєґ']+$/;
-  const names = texts
-    .map(t => t.trim())
-    .filter(t => namePattern.test(t) && t.length > 2 && !NOISE.has(t));
-  return names;
+  return texts.map(t => t.trim()).filter(t => namePattern.test(t) && t.length > 2 && !NOISE.has(t));
 }
 
-// Витягнути адресу
 function extractAddress(texts) {
-  let street = null, house = null;
   const fullText = texts.join(' ');
-  // Шукаємо вулицю + будинок у об'єднаному тексті
   const fullMatch = fullText.match(/вул\.\s*([А-ЯІЇЄҐа-яіїєґ'.А-Яа-я\s-]+?)(?:,\s*буд\.\s*(\d+))?(?:\s|$)/);
   if (fullMatch) {
-    street = 'вул. ' + fullMatch[1].trim();
-    house = fullMatch[2] ? ', буд. ' + fullMatch[2] : '';
+    const street = 'вул. ' + fullMatch[1].trim();
+    const house = fullMatch[2] ? ', буд. ' + fullMatch[2] : '';
     return street + house;
   }
-  // Окремо по текстах
   for (const t of texts) {
     const m = t.match(/(вул\.\s*[А-ЯІЇЄҐа-яіїєґ'.\s-]+(?:,\s*буд\.\s*\d+)?)/);
     if (m) return m[1].trim();
@@ -76,12 +126,10 @@ function extractAddress(texts) {
   return null;
 }
 
-// Витягнути дати народження
 function extractDates(texts) {
   return texts.filter(t => /^\d{2}\.\d{2}\.\d{4}$/.test(t.trim()));
 }
 
-// Витягнути спорідненість
 function extractRelations(texts) {
   const rels = [];
   const relPatterns = ['голова', 'дружина', 'чоловік', 'син', 'дочка', 'донька',
@@ -90,61 +138,44 @@ function extractRelations(texts) {
   for (const t of texts) {
     const lower = t.toLowerCase().trim();
     for (const rel of relPatterns) {
-      if (lower === rel || lower.startsWith(rel + ' ')) {
-        rels.push(rel);
-        break;
-      }
+      if (lower === rel || lower.startsWith(rel + ' ')) { rels.push(rel); break; }
     }
   }
   return rels;
 }
 
-// Витягнути земельні дані
 function extractLandInfo(texts) {
   const landParts = [];
   for (const t of texts) {
-    if (t.match(/\d+[.,]\d{4}/) || t.match(/га$/i)) {
-      landParts.push(t.trim());
-    }
-    if (t.match(/присадибн|селянськ|город|сіножат|пасовищ|рілля|паї/i)) {
-      landParts.push(t.trim());
-    }
+    if (t.match(/\d+[.,]\d{4}/) || t.match(/га$/i)) landParts.push(t.trim());
+    if (t.match(/присадибн|селянськ|город|сіножат|пасовищ|рілля|паї/i)) landParts.push(t.trim());
   }
   return landParts.join('; ');
 }
 
-// Витягнути майно/худобу
 function extractProperty(texts) {
   const props = [];
   const propPatterns = ['ВРХ', 'свині', 'кролі', 'вівці', 'кози', 'коні', 'птиця',
-    'бджоли', 'хутрові', 'кролі', 'будинок', 'гараж', 'сарай', 'погріб'];
+    'бджоли', 'хутрові', 'будинок', 'гараж', 'сарай', 'погріб'];
   for (const t of texts) {
     for (const p of propPatterns) {
-      if (t.toLowerCase().includes(p.toLowerCase())) {
-        props.push(t.trim());
-        break;
-      }
+      if (t.toLowerCase().includes(p.toLowerCase())) { props.push(t.trim()); break; }
     }
   }
   return props;
 }
 
-// Збирає ПІБ з окремих слів у повні імена
-function assembleNames(nameWords, dates, relations) {
-  // Прізвище зазвичай перше, потім ім'я, по-батькові
+function assembleNames(nameWords) {
   const fullNames = [];
   let current = [];
   for (const w of nameWords) {
     current.push(w);
-    // По-батькові закінчується на -вна, -вич, -ович, -івна, -ївна
     if (w.match(/(вна|вич|ович|івна|ївна|ївни|овна)$/i) && current.length >= 2) {
       fullNames.push(current.join(' '));
       current = [];
     }
   }
-  if (current.length >= 2) {
-    fullNames.push(current.join(' '));
-  }
+  if (current.length >= 2) fullNames.push(current.join(' '));
   return fullNames;
 }
 
@@ -165,9 +196,7 @@ async function processBook(filePath) {
 
   const zip = new AdmZip(filePath);
   const pageCount = getPageCount(zip);
-
-  // Групуємо сторінки за номером справи
-  const casePages = new Map(); // caseNum -> [{pageNum, texts}]
+  const casePages = new Map();
   let lastCase = null;
 
   for (let p = 1; p <= pageCount; p++) {
@@ -175,7 +204,6 @@ async function processBook(filePath) {
     const caseNum = extractCaseNum(texts);
     const currentCase = caseNum || lastCase;
     if (!currentCase) continue;
-
     if (!casePages.has(currentCase)) casePages.set(currentCase, []);
     casePages.get(currentCase).push({ pageNum: p, texts });
     lastCase = currentCase;
@@ -187,30 +215,19 @@ async function processBook(filePath) {
   for (const [caseNum, pages] of casePages) {
     const allTexts = pages.flatMap(p => p.texts);
     const allContent = allTexts.filter(t => t.trim().length > 1).join(' ');
-
-    // Витягуємо структуровані дані
     const nameWords = extractNames(allTexts);
-    const fullNames = assembleNames(nameWords, [], []);
+    const fullNames = assembleNames(nameWords);
     const address = extractAddress(allTexts);
     const dates = extractDates(allTexts);
     const relations = extractRelations(allTexts);
     const landInfo = extractLandInfo(allTexts);
     const properties = extractProperty(allTexts);
-
-    // Голова домогосподарства — перше знайдене ПІБ
     const ownerName = fullNames.length > 0 ? fullNames[0] : null;
-
-    // Члени сім'ї (решта імен)
-    const members = [];
-    for (let i = 0; i < fullNames.length; i++) {
-      members.push({
-        fullName: fullNames[i],
-        birthDate: dates[i] || null,
-        relation: i === 0 ? 'голова' : (relations[i] || null),
-      });
-    }
-
-    // Номер книги та справи
+    const members = fullNames.map((name, i) => ({
+      full_name: name,
+      birth_year: dates[i] ? parseInt(dates[i].split('.')[2]) : null,
+      relation: i === 0 ? 'голова' : (relations[i] || null),
+    }));
     const [bookPart, casePart] = caseNum.split('-');
 
     results.push({
@@ -223,24 +240,20 @@ async function processBook(filePath) {
       landInfo,
       properties,
       content: allContent,
-      startPage: pages[0].pageNum,
     });
   }
-
   return results;
 }
 
 async function main() {
-  // Очищаємо старі дані
+  SUPA_URL = await getVaultSecret('starostat/supabase_url');
+  SUPA_KEY = await getVaultSecret('starostat/supabase_secret_key');
+
+  // Очищаємо в правильному порядку (FK constraints)
   console.log('Очищаю старі дані...');
-  await pool.query('DELETE FROM household_search');
-  await pool.query('DELETE FROM property');
-  await pool.query('DELETE FROM land_plots');
-  await pool.query('DELETE FROM household_members');
-  await pool.query('DELETE FROM households');
-  await pool.query("ALTER SEQUENCE households_id_seq RESTART WITH 1");
-  await pool.query("ALTER SEQUENCE household_members_id_seq RESTART WITH 1");
-  await pool.query("ALTER SEQUENCE household_search_id_seq RESTART WITH 1");
+  for (const table of ['household_search', 'property', 'land_plots', 'household_members', 'households']) {
+    await supabaseDelete(table);
+  }
   console.log('Готово.\n');
 
   const files = fs.readdirSync(BOOKS_DIR).filter(f => f.endsWith('.xps'));
@@ -255,50 +268,29 @@ async function main() {
       const households = await processBook(filePath);
 
       for (const h of households) {
-        // Вставляємо домогосподарство
-        const res = await pool.query(
-          `INSERT INTO households (book_num, case_num, owner_name, address, village)
-           VALUES ($1, $2, $3, $4, $5) RETURNING id`,
-          [h.bookNum, h.caseNum, h.ownerName || 'Не розпізнано', h.address, h.village]
-        );
-        const hId = res.rows[0].id;
+        const [inserted] = await supabasePost('households', {
+          book_num: h.bookNum,
+          case_num: h.caseNum,
+          owner_name: h.ownerName || 'Не розпізнано',
+          address: h.address,
+          village: h.village,
+        });
+        const hId = inserted.id;
 
-        // Вставляємо членів
         for (const m of h.members) {
-          const birthYear = m.birthDate ? parseInt(m.birthDate.split('.')[2]) : null;
-          await pool.query(
-            `INSERT INTO household_members (household_id, full_name, birth_year, relation)
-             VALUES ($1, $2, $3, $4)`,
-            [hId, m.fullName, birthYear, m.relation]
-          );
+          await supabasePost('household_members', { household_id: hId, ...m });
           totalMembers++;
         }
 
-        // Вставляємо земельні дані
         if (h.landInfo) {
-          await pool.query(
-            `INSERT INTO land_plots (household_id, plot_type, notes)
-             VALUES ($1, $2, $3)`,
-            [hId, 'загальна', h.landInfo]
-          );
+          await supabasePost('land_plots', { household_id: hId, plot_type: 'загальна', notes: h.landInfo });
         }
 
-        // Вставляємо майно
         for (const prop of h.properties) {
-          await pool.query(
-            `INSERT INTO property (household_id, property_type, description)
-             VALUES ($1, $2, $3)`,
-            [hId, prop, prop]
-          );
+          await supabasePost('property', { household_id: hId, property_type: prop, description: prop });
         }
 
-        // Вставляємо пошуковий запис
-        await pool.query(
-          `INSERT INTO household_search (household_id, content)
-           VALUES ($1, $2)`,
-          [hId, h.content]
-        );
-
+        await supabasePost('household_search', { household_id: hId, content: h.content });
         totalHouseholds++;
       }
 
@@ -312,22 +304,7 @@ async function main() {
     }
   }
 
-  // Фінальна статистика
-  const stats = await pool.query(`
-    SELECT
-      (SELECT count(*) FROM households) as households,
-      (SELECT count(*) FROM households WHERE owner_name != 'Не розпізнано') as with_names,
-      (SELECT count(*) FROM household_members) as members,
-      (SELECT count(*) FROM land_plots) as land,
-      (SELECT count(*) FROM property) as props,
-      (SELECT count(*) FROM household_search) as search
-  `);
-
-  console.log('\n✅ Завершено!');
-  console.log('Статистика:', stats.rows[0]);
-  console.log(`Домогосподарств: ${totalHouseholds}, Членів: ${totalMembers}`);
-
-  await pool.end();
+  console.log(`\n✅ Завершено! Домогосподарств: ${totalHouseholds}, Членів: ${totalMembers}`);
 }
 
-main().catch(e => { console.error(e); pool.end(); });
+main().catch(e => console.error(e));

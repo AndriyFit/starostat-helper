@@ -1,22 +1,29 @@
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 
-const creds = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vault', 'google-credentials.json'), 'utf-8'));
-const token = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vault', 'google-token.json'), 'utf-8'));
-const oauth2 = new google.auth.OAuth2(creds.web.client_id, creds.web.client_secret);
-oauth2.setCredentials(token);
+const VAULT_KEY = '0pYJRSvF3w0HcDB3Bx38jGvoFukUS20pfYsNhW2nS_s';
 
-oauth2.on('tokens', (t) => {
-  const updated = { ...token, ...t };
-  fs.writeFileSync(path.join(__dirname, '..', 'vault', 'google-token.json'), JSON.stringify(updated, null, 2));
-});
+async function getVaultSecret(key) {
+  return new Promise((resolve, reject) => {
+    http.get(`http://127.0.0.1:8400/api/secrets/${key}`, {
+      headers: { 'X-API-Key': VAULT_KEY },
+    }, (res) => {
+      let data = '';
+      res.on('data', (c) => data += c);
+      res.on('end', () => {
+        const parsed = JSON.parse(data);
+        resolve(parsed.value);
+      });
+    }).on('error', reject);
+  });
+}
 
-const drive = google.drive({ version: 'v3', auth: oauth2 });
-const FOLDER_ID = '1foACiW4XuNRJDlLC4-oAE9b2ekfoxTxM';
+const FOLDER_ID = '1ElhwAvHf23uPDArqhc9MxzsWYVTTxQjf';
 const OUT_DIR = path.join(__dirname, 'pgo-books');
 
-async function downloadFile(fileId, fileName) {
+async function downloadFile(drive, fileId, fileName) {
   const destPath = path.join(OUT_DIR, fileName);
   if (fs.existsSync(destPath)) {
     console.log('  ⏭️  ' + fileName + ' (вже є)');
@@ -32,20 +39,47 @@ async function downloadFile(fileId, fileName) {
 }
 
 async function run() {
-  if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
+  const creds = JSON.parse(await getVaultSecret('starostat/google_credentials'));
+  const token = JSON.parse(await getVaultSecret('starostat/google_token'));
 
-  const res = await drive.files.list({
-    q: `'${FOLDER_ID}' in parents and mimeType='application/vnd.ms-xpsdocument'`,
-    fields: 'files(id,name,size)',
-    pageSize: 50,
+  const oauth2 = new google.auth.OAuth2(creds.web.client_id, creds.web.client_secret);
+  oauth2.setCredentials(token);
+
+  oauth2.on('tokens', async (t) => {
+    const updated = { ...token, ...t };
+    // Update token in Vault
+    const body = JSON.stringify({ value: JSON.stringify(updated), project: 'starostat', description: 'Google OAuth token (auto-refreshed)' });
+    const req = http.request('http://127.0.0.1:8400/api/secrets/starostat/google_token', {
+      method: 'PUT',
+      headers: { 'X-API-Key': VAULT_KEY, 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
+    });
+    req.write(body);
+    req.end();
   });
 
-  console.log(`Знайдено ${res.data.files.length} XPS файлів. Завантажую...\n`);
+  const drive = google.drive({ version: 'v3', auth: oauth2 });
 
-  for (const f of res.data.files) {
+  if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
+
+  let files = [];
+  let pageToken = null;
+  do {
+    const res = await drive.files.list({
+      q: `'${FOLDER_ID}' in parents and (mimeType='application/vnd.ms-xpsdocument' or name contains '.xps')`,
+      fields: 'nextPageToken, files(id,name,size)',
+      pageSize: 100,
+      pageToken,
+    });
+    files = files.concat(res.data.files);
+    pageToken = res.data.nextPageToken;
+  } while (pageToken);
+
+  console.log(`Знайдено ${files.length} XPS файлів. Завантажую...\n`);
+
+  for (const f of files) {
     const safeName = f.name.replace(/[<>:"|?*]/g, '_');
     try {
-      await downloadFile(f.id, safeName);
+      await downloadFile(drive, f.id, safeName);
     } catch (e) {
       console.log('  ❌ ' + f.name + ': ' + e.message);
     }

@@ -35,6 +35,15 @@
     }
     .card h2 { font-size: 18px; margin-bottom: 16px; color: #1a237e; }
 
+    /* Category groups */
+    .category-group { margin-bottom: 20px; }
+    .category-title {
+      font-size: 14px; font-weight: 700; color: #1a237e;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 8px 0; margin-bottom: 8px;
+      border-bottom: 2px solid #e8eaf6;
+    }
+
     /* Template list */
     .template-list { display: grid; gap: 10px; }
     .template-item {
@@ -54,14 +63,26 @@
       margin-bottom: 4px; color: #333;
     }
     .form-group .hint { font-size: 11px; color: #888; margin-bottom: 4px; }
-    .form-group input, .form-group textarea {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%; padding: 10px 12px; border: 1.5px solid #ddd;
       border-radius: 8px; font-size: 14px; font-family: inherit;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s; background: white;
     }
-    .form-group input:focus, .form-group textarea:focus {
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
       outline: none; border-color: #1a237e;
     }
+
+    .staff-checkboxes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .staff-check {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+      cursor: pointer; transition: all 0.2s; font-size: 13px; user-select: none;
+    }
+    .staff-check:hover { border-color: #1a237e; background: #f5f5ff; }
+    .staff-check.checked { border-color: #1a237e; background: #e8eaf6; }
+    .staff-check input { display: none; }
+    .staff-role { font-weight: 600; color: #1a237e; }
+    .staff-name { color: #333; }
     .form-group textarea { min-height: 80px; resize: vertical; }
     .form-group .required::after { content: ' *'; color: #e53935; }
 
@@ -96,21 +117,57 @@
 
     .hidden { display: none; }
 
+    /* Tabs */
+    .nav-tabs { display: flex; gap: 0; margin-bottom: 24px; }
+    .nav-tab {
+      flex: 1; padding: 14px; text-align: center; cursor: pointer;
+      font-size: 15px; font-weight: 600; border-bottom: 3px solid transparent;
+      color: #666; transition: all 0.2s;
+    }
+    .nav-tab:hover { color: #1a237e; background: #f5f5ff; }
+    .nav-tab.active { color: #1a237e; border-bottom-color: #1a237e; }
+
+    /* Search */
+    .search-row { display: flex; gap: 12px; margin-bottom: 16px; }
+    .search-row input, .search-row select { flex: 1; }
+    .search-row input { flex: 3; }
+    .result-card {
+      background: white; border-radius: 10px; padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 12px;
+      border-left: 4px solid #1a237e;
+    }
+    .result-card h3 { font-size: 15px; margin-bottom: 6px; color: #1a237e; }
+    .result-card .meta { font-size: 12px; color: #888; margin-bottom: 8px; }
+    .result-card .members { font-size: 13px; color: #333; }
+    .result-card .members span { display: inline-block; background: #e8eaf6; padding: 2px 8px; border-radius: 4px; margin: 2px 4px 2px 0; font-size: 12px; }
+    .search-stats { font-size: 13px; color: #888; margin-bottom: 12px; }
+    .no-results { text-align: center; padding: 40px; color: #888; font-size: 15px; }
+
     @media (max-width: 600px) {
       .container { padding: 0 12px; margin: 16px auto; }
       .card { padding: 16px; }
       .steps { flex-wrap: wrap; }
+      .search-row { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Формування документів</h1>
+  <h1>Помічник старости</h1>
   <p>Ременівський старостинський округ | Жовтанецька сільська рада</p>
 </div>
 
 <div class="container">
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchTab('docs')">Документи</div>
+    <div class="nav-tab" onclick="switchTab('search')">Пошук ПГК</div>
+  </div>
+
+  <!-- ========== DOCUMENTS TAB ========== -->
+  <div id="tab-docs">
+
   <!-- Steps -->
   <div class="steps">
     <div class="step active" id="step1-ind">1. Тип документа</div>
@@ -148,6 +205,26 @@
       <a id="download-link" class="btn btn-success" download>Завантажити .docx</a>
     </div>
   </div>
+
+  </div><!-- /tab-docs -->
+
+  <!-- ========== SEARCH TAB ========== -->
+  <div id="tab-search" class="hidden">
+    <div class="card">
+      <h2>Пошук по погосподарських книгах</h2>
+      <div class="search-row">
+        <input type="text" id="search-query" placeholder="Введіть ПІБ..." onkeydown="if(event.key==='Enter')doSearch()">
+        <select id="search-year">
+          <option value="all">Усі роки</option>
+          <option value="2016-2020">2016–2020</option>
+        </select>
+        <button class="btn btn-primary" onclick="doSearch()">Шукати</button>
+      </div>
+      <div id="search-stats" class="search-stats hidden"></div>
+      <div id="search-results"></div>
+    </div>
+  </div><!-- /tab-search -->
+
 </div>
 
 <script>
@@ -162,15 +239,57 @@ async function loadTemplates() {
   renderTemplates();
 }
 
+const STAFF = [
+  { role: 'Староста', name: 'Гордієнко А.В.', nameGenitive: 'старости Гордієнка А.В.' },
+  { role: 'Діловод', name: 'Мацюра Г.М.', nameGenitive: 'діловода Мацюри Г.М.' },
+  { role: 'Депутат', name: 'Гришан А.Ю.', nameGenitive: 'депутата Гришана А.Ю.' },
+];
+
+const STAFF_FIELDS = ['starosta', 'dilovod'];
+const COMMISSION_FIELDS = ['commission'];
+const SIGNATURES_FIELDS = ['signatures'];
+
+const CATEGORIES = [
+  { prefix: 'dovidka', label: 'Довідки' },
+  { prefix: 'vidomosti', label: 'Відомості' },
+  { prefix: 'akt', label: 'Акти' },
+  { prefix: 'vypyska,zayava', label: 'Виписки та заяви' },
+  { prefix: 'vidpovid,lyst,povidomlennya', label: 'Листування' },
+];
+
+function getCategory(id) {
+  for (const cat of CATEGORIES) {
+    if (cat.prefix.split(',').some(p => id.startsWith(p))) return cat.label;
+  }
+  return 'Інше';
+}
+
 function renderTemplates() {
   const list = document.getElementById('template-list');
-  list.innerHTML = templates.map(t => `
-    <div class="template-item" onclick="selectTemplate('${t.id}')">
-      <h3>${t.name}</h3>
-      <p>${t.description}</p>
-      <div class="when">${t.when_needed}</div>
-    </div>
-  `).join('');
+  const grouped = {};
+  for (const t of templates) {
+    const cat = getCategory(t.id);
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(t);
+  }
+
+  const order = CATEGORIES.map(c => c.label).concat(['Інше']);
+  list.innerHTML = order
+    .filter(cat => grouped[cat])
+    .map(cat => `
+      <div class="category-group">
+        <div class="category-title">${cat}</div>
+        <div class="template-list">
+          ${grouped[cat].map(t => `
+            <div class="template-item" onclick="selectTemplate('${t.id}')">
+              <h3>${t.name}</h3>
+              <p>${t.description}</p>
+              <div class="when">${t.when_needed}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
 }
 
 function selectTemplate(id) {
@@ -208,29 +327,81 @@ function renderForm() {
   form.innerHTML = '';
 
   for (const [key, field] of Object.entries(t.required_data)) {
-    if (field.auto) continue; // skip auto-filled fields
+    if (field.auto) continue;
 
     const isRequired = field.required;
-    const isLong = key === 'members' || key === 'results' || key === 'commission'
-      || key === 'body' || key === 'response_text' || key === 'additional_info'
-      || key === 'signatures' || key === 'conclusion';
-
     const group = document.createElement('div');
     group.className = 'form-group';
 
     let labelClass = isRequired ? 'required' : '';
     let html = `<label class="${labelClass}">${field.label}</label>`;
     if (field.note) html += `<div class="hint">${field.note}</div>`;
-    if (field.example) html += `<div class="hint">Приклад: ${field.example}</div>`;
 
-    if (isLong) {
-      html += `<textarea name="${key}" placeholder="${field.example || ''}" ${isRequired ? 'required' : ''}>${field.default || ''}</textarea>`;
+    if (STAFF_FIELDS.includes(key)) {
+      const role = key === 'starosta' ? 'Староста' : 'Діловод';
+      const person = STAFF.find(s => s.role === role);
+      html += `<select name="${key}">`;
+      html += `<option value="${person.name}" selected>${person.name} — ${person.role}</option>`;
+      html += `</select>`;
+    } else if (COMMISSION_FIELDS.includes(key)) {
+      html += `<div class="staff-checkboxes" id="commission-picks">`;
+      STAFF.forEach((s, i) => {
+        const checked = i < 2 ? 'checked' : '';
+        html += `<label class="staff-check ${checked ? 'checked' : ''}" onclick="toggleStaffCheck(this)">
+          <input type="checkbox" data-genitive="${s.nameGenitive}" data-name="${s.name}" ${checked}>
+          <span class="staff-role">${s.role}</span>
+          <span class="staff-name">${s.name}</span>
+        </label>`;
+      });
+      html += `</div>`;
+      html += `<input type="hidden" name="commission" id="commission-value">`;
+    } else if (SIGNATURES_FIELDS.includes(key)) {
+      html += `<div class="staff-checkboxes" id="signatures-picks">`;
+      STAFF.forEach((s, i) => {
+        const checked = i < 2 ? 'checked' : '';
+        html += `<label class="staff-check ${checked ? 'checked' : ''}" onclick="toggleStaffCheck(this)">
+          <input type="checkbox" data-name="${s.name}" ${checked}>
+          <span class="staff-role">${s.role}</span>
+          <span class="staff-name">${s.name}</span>
+        </label>`;
+      });
+      html += `</div>`;
+      html += `<input type="hidden" name="signatures" id="signatures-value">`;
     } else {
-      html += `<input type="text" name="${key}" value="${field.default || ''}" placeholder="${field.example || ''}" ${isRequired ? 'required' : ''}>`;
+      if (field.example) html += `<div class="hint">Приклад: ${field.example}</div>`;
+      const isLong = ['members', 'results', 'body', 'response_text',
+        'additional_info', 'conclusion'].includes(key);
+      if (isLong) {
+        html += `<textarea name="${key}" placeholder="${field.example || ''}" ${isRequired ? 'required' : ''}>${field.default || ''}</textarea>`;
+      } else {
+        html += `<input type="text" name="${key}" value="${field.default || ''}" placeholder="${field.example || ''}" ${isRequired ? 'required' : ''}>`;
+      }
     }
 
     group.innerHTML = html;
     form.appendChild(group);
+  }
+
+  updateStaffHiddenFields();
+}
+
+function toggleStaffCheck(label) {
+  const cb = label.querySelector('input[type="checkbox"]');
+  cb.checked = !cb.checked;
+  label.classList.toggle('checked', cb.checked);
+  updateStaffHiddenFields();
+}
+
+function updateStaffHiddenFields() {
+  const commEl = document.getElementById('commission-value');
+  if (commEl) {
+    const checked = document.querySelectorAll('#commission-picks input:checked');
+    commEl.value = Array.from(checked).map(c => c.dataset.genitive).join(', ');
+  }
+  const sigEl = document.getElementById('signatures-value');
+  if (sigEl) {
+    const checked = document.querySelectorAll('#signatures-picks input:checked');
+    sigEl.value = Array.from(checked).map(c => c.dataset.name).join('\n');
   }
 }
 
@@ -270,6 +441,70 @@ async function generateDoc() {
   } finally {
     btn.disabled = false;
     btn.innerHTML = 'Сформувати документ';
+  }
+}
+
+// ========== TABS ==========
+function switchTab(tab) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-docs').classList.add('hidden');
+  document.getElementById('tab-search').classList.add('hidden');
+
+  if (tab === 'docs') {
+    document.getElementById('tab-docs').classList.remove('hidden');
+    document.querySelectorAll('.nav-tab')[0].classList.add('active');
+  } else {
+    document.getElementById('tab-search').classList.remove('hidden');
+    document.querySelectorAll('.nav-tab')[1].classList.add('active');
+    document.getElementById('search-query').focus();
+  }
+}
+
+// ========== SEARCH ==========
+async function doSearch() {
+  const q = document.getElementById('search-query').value.trim();
+  const year = document.getElementById('search-year').value;
+  const resultsEl = document.getElementById('search-results');
+  const statsEl = document.getElementById('search-stats');
+
+  if (q.length < 2) {
+    resultsEl.innerHTML = '<div class="no-results">Введіть мінімум 2 символи для пошуку</div>';
+    statsEl.classList.add('hidden');
+    return;
+  }
+
+  resultsEl.innerHTML = '<div class="no-results"><span class="spinner" style="border-color:#1a237e;border-top-color:transparent;"></span> Шукаю...</div>';
+
+  try {
+    const params = new URLSearchParams({ q });
+    if (year !== 'all') params.set('year', year);
+    const res = await fetch('/api/search?' + params);
+    const data = await res.json();
+
+    if (!data.success) throw new Error(data.error);
+
+    statsEl.textContent = `Знайдено: ${data.count} результатів`;
+    statsEl.classList.remove('hidden');
+
+    if (data.count === 0) {
+      resultsEl.innerHTML = '<div class="no-results">Нічого не знайдено. Спробуйте інший запит.</div>';
+      return;
+    }
+
+    resultsEl.innerHTML = data.results.map(r => `
+      <div class="result-card">
+        <h3>${r.owner_name}</h3>
+        <div class="meta">
+          ${r.address || 'Адреса не вказана'} · Книга ${r.book_num}, справа ${r.case_num} · ${r.year_range || ''}
+        </div>
+        ${r.members.length > 0 ? `<div class="members">
+          <b>Члени сім'ї:</b>
+          ${r.members.map(m => `<span>${m.full_name}${m.birth_year ? ' (' + m.birth_year + ')' : ''}${m.relation ? ' — ' + m.relation : ''}</span>`).join('')}
+        </div>` : ''}
+      </div>
+    `).join('');
+  } catch (err) {
+    resultsEl.innerHTML = '<div class="no-results">Помилка: ' + err.message + '</div>';
   }
 }
 

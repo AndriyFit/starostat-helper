@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "adm-zip": "^0.5.17",
     "docxtemplater": "^3.68.3",
+    "googleapis": "^171.4.0",
     "pizzip": "^3.2.0"
   }
 }

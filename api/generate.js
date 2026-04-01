@@ -4,6 +4,18 @@ const Docxtemplater = require('docxtemplater');
 const PizZip = require('pizzip');
 
 const TEMPLATES_DIR = path.join(__dirname, '..', 'kb', 'templates');
+const DOC_FORMS_DIR = path.join(__dirname, '..', 'kb', 'doc-forms');
+
+function getTemplatePlaceholders(templateId) {
+  const files = fs.readdirSync(DOC_FORMS_DIR).filter(f => f.endsWith('.json'));
+  for (const f of files) {
+    const form = JSON.parse(fs.readFileSync(path.join(DOC_FORMS_DIR, f), 'utf-8'));
+    if (form.id === templateId) {
+      return Object.keys(form.required_data);
+    }
+  }
+  return [];
+}
 
 module.exports = (req, res) => {
   if (req.method !== 'POST') {
@@ -32,6 +44,13 @@ module.exports = (req, res) => {
     if (!data.month) data.month = months[now.getMonth()];
     if (!data.year) data.year = String(now.getFullYear());
     if (!data.date) data.date = `${data.day} ${data.month} ${data.year} року`;
+
+    const placeholders = getTemplatePlaceholders(templateId);
+    for (const key of placeholders) {
+      if (data[key] === undefined || data[key] === null) {
+        data[key] = '';
+      }
+    }
 
     const content = fs.readFileSync(templatePath, 'binary');
     const zip = new PizZip(content);
